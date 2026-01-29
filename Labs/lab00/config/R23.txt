@@ -1,8 +1,8 @@
 Building configuration...
 
-Current configuration : 1299 bytes
+Current configuration : 1362 bytes
 !
-! Last configuration change at 15:30:09 UTC Wed Jan 28 2026
+! Last configuration change at 21:07:12 UTC Wed Jan 28 2026
 !
 version 15.5
 service timestamps debug datetime msec
@@ -75,6 +75,9 @@ redundancy
 !
 !
 !
+!
+interface Loopback10
+ ip address 23.23.23.23 255.255.255.255
 !
 interface Ethernet0/0
  description "link to R22 e0/2"

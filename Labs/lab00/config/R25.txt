@@ -1,14 +1,15 @@
-R14#show running-config
 Building configuration...
 
-Current configuration : 1051 bytes
+Current configuration : 1419 bytes
+!
+! Last configuration change at 21:15:23 UTC Wed Jan 28 2026
 !
 version 15.5
 service timestamps debug datetime msec
 service timestamps log datetime msec
 no service password-encryption
 !
-hostname R14
+hostname R25
 !
 boot-start-marker
 boot-end-marker
@@ -43,7 +44,6 @@ mmi snmp-timeout 180
 !
 !
 !
-no ip domain lookup
 ip cef
 no ipv6 cef
 !
@@ -58,7 +58,6 @@ multilink bundle-name authenticated
 cts logging verbose
 !
 !
-username cisco privilege 15 secret 5 $1$N0VH$SR48JwdVXjpt6K1szJFk8.
 !
 redundancy
 !
@@ -76,19 +75,38 @@ redundancy
 !
 !
 !
+interface Loopback10
+ ip address 25.25.25.25 255.255.255.255
+!
 interface Ethernet0/0
- no ip address
- shutdown
+ description "Link to R23 e0/1"
+ ip address 10.1.23.2 255.255.255.252
 !
 interface Ethernet0/1
+ description "link to R27 e0/0"
+ ip address 10.1.25.1 255.255.255.252
+!
+interface Ethernet0/2
+ description "Link to R26 e0/2"
+ ip address 10.2.25.1 255.255.255.252
+!
+interface Ethernet0/3
+ description "link to R28 e0/3"
+ ip address 10.3.25.1 255.255.255.252
+!
+interface Ethernet1/0
  no ip address
  shutdown
 !
-interface Ethernet0/2
- description "link to R22 e0/2"
- ip address 10.0.22.2 255.255.255.252
+interface Ethernet1/1
+ no ip address
+ shutdown
 !
-interface Ethernet0/3
+interface Ethernet1/2
+ no ip address
+ shutdown
+!
+interface Ethernet1/3
  no ip address
  shutdown
 !
