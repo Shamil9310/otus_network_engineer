@@ -1,11 +1,14 @@
 
 !
-version 15.4
+! Last configuration change at 17:16:29 UTC Sat Jan 31 2026
+!
+version 15.2
 service timestamps debug datetime msec
 service timestamps log datetime msec
 no service password-encryption
+service compress-config
 !
-hostname R21
+hostname SW3
 !
 boot-start-marker
 boot-end-marker
@@ -13,10 +16,6 @@ boot-end-marker
 !
 !
 no aaa new-model
-mmi polling-interval 60
-no mmi auto-configure
-no mmi pvc
-mmi snmp-timeout 180
 !
 !
 !
@@ -25,28 +24,15 @@ mmi snmp-timeout 180
 !
 !
 !
-
-
-!
-!
-!
-!
-no ip domain lookup
+no ip domain-lookup
 ip cef
 no ipv6 cef
 !
-multilink bundle-name authenticated
 !
+spanning-tree mode pvst
+spanning-tree extend system-id
 !
-!
-!
-!
-!
-!
-!
-!
-redundancy
-!
+vlan internal allocation policy ascending
 !
 ! 
 !
@@ -60,53 +46,49 @@ redundancy
 !
 !
 !
-!
 interface Loopback10
  no shutdown
- ip address 21.21.21.21 255.255.255.255
+ ip address 3.3.3.3 255.255.255.255
 !
 interface Ethernet0/0
  no shutdown
- description "link to R15 e0/2"
- ip address 10.0.21.1 255.255.255.252
+ description "link SW4 e0/0"
+ switchport trunk allowed vlan 30
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
 !
 interface Ethernet0/1
  no shutdown
- description "link to R22 e0/1"
- ip address 10.1.22.2 255.255.255.252
+ description "link SW3 e0/1"
+ switchport trunk allowed vlan 30
+ switchport trunk encapsulation dot1q
 !
 interface Ethernet0/2
  no shutdown
- description "link to R24 e0/0"
- ip address 10.2.21.1 255.255.255.252
+ description "link VPC1"
+ switchport access vlan 30
+ switchport mode access
 !
 interface Ethernet0/3
  no shutdown
- no ip address
- shutdown
 !
 interface Ethernet1/0
  no shutdown
- no ip address
- shutdown
 !
 interface Ethernet1/1
  no shutdown
- no ip address
- shutdown
 !
 interface Ethernet1/2
  no shutdown
- no ip address
- shutdown
 !
 interface Ethernet1/3
  no shutdown
- no ip address
- shutdown
+!
+interface Vlan30
+ no shutdown
+ ip address 10.30.1.3 255.255.255.0
 !
 ip forward-protocol nd
-!
 !
 no ip http server
 no ip http secure-server
@@ -114,21 +96,15 @@ no ip http secure-server
 !
 !
 !
+!
+!
 control-plane
-!
-!
-!
-!
-!
-!
 !
 !
 line con 0
  logging synchronous
 line aux 0
 line vty 0 4
- login
- transport input none
 !
 !
 end

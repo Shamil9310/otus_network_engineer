@@ -1,11 +1,13 @@
 
 !
+! Last configuration change at 17:39:23 UTC Sat Jan 31 2026
+!
 version 15.4
 service timestamps debug datetime msec
 service timestamps log datetime msec
 no service password-encryption
 !
-hostname R21
+hostname R13
 !
 boot-start-marker
 boot-end-marker
@@ -61,29 +63,25 @@ redundancy
 !
 !
 !
-interface Loopback10
- no shutdown
- ip address 21.21.21.21 255.255.255.255
-!
 interface Ethernet0/0
  no shutdown
- description "link to R15 e0/2"
- ip address 10.0.21.1 255.255.255.252
+ description "link SW5 e1/0"
+ ip address 10.0.13.1 255.255.255.252
 !
 interface Ethernet0/1
  no shutdown
- description "link to R22 e0/1"
- ip address 10.1.22.2 255.255.255.252
+ description "link SW4 e1/1"
+ ip address 10.1.13.1 255.255.255.252
 !
 interface Ethernet0/2
  no shutdown
- description "link to R24 e0/0"
- ip address 10.2.21.1 255.255.255.252
+ description "link R15 e0/2"
+ ip address 10.0.15.2 255.255.255.252
 !
 interface Ethernet0/3
  no shutdown
- no ip address
- shutdown
+ description "link R14 e0/3"
+ ip address 10.1.14.2 255.255.255.252
 !
 interface Ethernet1/0
  no shutdown
