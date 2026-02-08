@@ -1,0 +1,137 @@
+
+!
+! Last configuration change at 11:09:05 UTC Sun Feb 8 2026
+!
+version 15.5
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname google
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+bsd-client server url https://cloudsso.cisco.com/as/token.oauth2
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+
+
+!
+!
+!
+!
+no ip domain lookup
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+cts logging verbose
+!
+!
+!
+redundancy
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback1
+ no shutdown
+ ip address 20.20.20.20 255.255.255.255
+!
+interface Loopback10
+ no shutdown
+ ip address 8.8.8.8 255.255.255.255
+!
+interface Ethernet0/0
+ no shutdown
+ ip address 6.6.6.1 255.255.255.252
+!
+interface Ethernet0/1
+ no shutdown
+ ip address 5.5.5.1 255.255.255.252
+!
+interface Ethernet0/2
+ no shutdown
+ no ip address
+ shutdown
+!
+interface Ethernet0/3
+ no shutdown
+ no ip address
+ shutdown
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 1.1.1.0 255.255.255.252 5.5.5.2
+ip route 2.2.2.0 255.255.255.252 6.6.6.2
+ip route 9.9.9.0 255.255.255.252 5.5.5.2
+ip route 9.9.9.0 255.255.255.252 6.6.6.2
+ip route 10.10.5.0 255.255.255.0 5.5.5.2
+ip route 10.10.5.0 255.255.255.0 6.6.6.2
+ip route 192.168.6.0 255.255.255.0 5.5.5.2
+ip route 192.168.6.0 255.255.255.0 6.6.6.2
+!
+!
+!
+!
+control-plane
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login
+ transport input none
+!
+!
+end

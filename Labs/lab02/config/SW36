@@ -1,0 +1,102 @@
+
+!
+! Last configuration change at 11:11:57 UTC Sun Feb 8 2026
+!
+version 15.1
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname SW36
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+ip cef
+!
+!
+no ip domain-lookup
+no ipv6 cef
+ipv6 multicast rpf use-bgp
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ no shutdown
+ description user
+ switchport access vlan 5
+ switchport mode access
+ duplex auto
+!
+interface Ethernet0/1
+ no shutdown
+ description voise
+ switchport access vlan 6
+ switchport mode access
+ duplex auto
+!
+interface Ethernet0/2
+ no shutdown
+ no switchport
+ ip address 9.9.9.2 255.255.255.252
+ duplex auto
+!
+interface Ethernet0/3
+ no shutdown
+ duplex auto
+!
+interface Vlan5
+ no shutdown
+ ip address 10.10.5.1 255.255.255.0
+!
+interface Vlan6
+ no shutdown
+ ip address 192.168.6.1 255.255.255.0
+!
+!
+no ip http server
+!
+ip route 1.1.1.0 255.255.255.252 9.9.9.1
+ip route 2.2.2.0 255.255.255.252 9.9.9.1
+ip route 5.5.5.0 255.255.255.252 9.9.9.1
+ip route 6.6.6.0 255.255.255.252 9.9.9.1
+ip route 8.8.8.8 255.255.255.255 9.9.9.1
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+!
+end
